@@ -71,13 +71,13 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/editUser/{id}")
-//    public String editUser(Model model, @PathVariable("id") Long id) {
-//
-//        model.addAttribute("user", userService.getUser(id));
-//        model.addAttribute("roleList",roleService.getList());
-//        return "admin_section";
-//    }
+    @GetMapping("/editUser/{id}")
+    public String editUser(Model model, @PathVariable("id") Long id) {
+
+        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("roleList",roleService.getList());
+        return "admin_section";
+    }
 
     @PatchMapping("/{id}")
     public String userSaveEdit(@PathVariable("id") Long id, @ModelAttribute("user") User user) {

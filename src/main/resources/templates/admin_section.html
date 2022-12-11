@@ -126,7 +126,7 @@
                                                         <div class="modal-body">
 
 <!--                                                            Начало Тело Модальной-->
-                                                            <form th:method="PATCH" th:action= "@{/admin/{id}(id=${user.getId()})}">
+                                                            <form th:method="PATCH" th:action= "@{/admin/editUser/{id}(id=${user.getId()})}">
                                                                 <div class="form-group">
                                                                     <label class="row font-weight-bold justify-content-center" for="id">ID </label>
                                                                     <input type="text" class="form-control" th:value="*{user.id}" id="id" readonly/>
