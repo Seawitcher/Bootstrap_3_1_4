@@ -42,6 +42,7 @@ public class AdminController {
         model.addAttribute("userList", userService.getList());
         User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
+        model.addAttribute("roleList",roleService.getList());
         return "admin_section";
     }
 
