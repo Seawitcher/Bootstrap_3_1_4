@@ -80,11 +80,17 @@ public class AdminController {
         return "admin_section";
     }
 
-    @PatchMapping("/{id}")
-    public String userSaveEdit(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
+
+    @PostMapping("/editUser/{id}")
+    public String userSaveEdit( @PathVariable("id") Long id, @ModelAttribute("user") User user) {
         userService.editUser(user);
         return "redirect:/admin";
     }
+//    @PatchMapping("/{id}")
+//    public String userSaveEdit(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
+//        userService.editUser(user);
+//        return "redirect:/admin";
+//    }
 //    @PatchMapping("/{id}")
 //    public String userSaveEdit(@ModelAttribute("user") User user, @ModelAttribute("roles") String roles) {
 //        userService.editUser(user, roles);
