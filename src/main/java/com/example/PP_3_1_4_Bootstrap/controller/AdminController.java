@@ -38,11 +38,13 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getUser(Model model, Authentication authentication) {
+    public String getUser(Model model, Authentication authentication, Long id) {
         model.addAttribute("userList", userService.getList());
-        User user = (User) authentication.getPrincipal();
-        model.addAttribute("user", user);
+        User admin = (User) authentication.getPrincipal();
+        model.addAttribute("user", admin);
         model.addAttribute("roleList",roleService.getList());
+//        model.addAttribute("user", userService.getList());
+
         return "admin_section";
     }
 
@@ -75,17 +77,18 @@ public class AdminController {
     @GetMapping("/editUser/{id}")
     public String editUser(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("users", userService.getUser(id));
         model.addAttribute("roleList",roleService.getList());
         return "admin_section";
     }
 
 
-    @PostMapping("/editUser/{id}")
-    public String userSaveEdit( @PathVariable("id") Long id, @ModelAttribute("user") User user) {
+    @PatchMapping("/editUser/{id}")
+    public String userSaveEdit(User user) {
         userService.editUser(user);
         return "redirect:/admin";
     }
+
 //    @PatchMapping("/{id}")
 //    public String userSaveEdit(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
 //        userService.editUser(user);
