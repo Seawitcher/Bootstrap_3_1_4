@@ -30,8 +30,8 @@ public class UserController {
 
     @GetMapping
     public String getUser(Model model, Authentication authentication) {
-        User admin = (User) authentication.getPrincipal();
-        model.addAttribute("admin", admin);
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("admin", user);
         return "userAuth";
     }
 

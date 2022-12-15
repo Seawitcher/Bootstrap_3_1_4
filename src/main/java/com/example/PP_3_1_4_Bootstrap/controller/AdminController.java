@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -38,12 +39,13 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getUser(Model model, Authentication authentication, Long id) {
+    public String getUser(Model model, Authentication authentication) {
         model.addAttribute("userList", userService.getList());
-        User admin = (User) authentication.getPrincipal();
-        model.addAttribute("user", admin);
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("user", user);
+
         model.addAttribute("roleList",roleService.getList());
-//        model.addAttribute("user", userService.getList());
+        model.addAttribute("users", userService.getUser(user.getId()));
 
         return "admin_section";
     }
@@ -68,7 +70,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}/delete")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
@@ -77,14 +79,15 @@ public class AdminController {
     @GetMapping("/editUser/{id}")
     public String editUser(Model model, @PathVariable("id") Long id) {
 
-        model.addAttribute("users", userService.getUser(id));
+        model.addAttribute("user", userService.getUser(id));
         model.addAttribute("roleList",roleService.getList());
         return "admin_section";
     }
 
 
-    @PatchMapping("/editUser/{id}")
-    public String userSaveEdit(User user) {
+    @PutMapping("/{id}/editUser")
+    public String userSaveEdit(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.editUser(user);
         return "redirect:/admin";
     }
