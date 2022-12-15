@@ -17,18 +17,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userService;
 
 
-//    private final SuccessUserHandler successUserHandler;
+    public WebSecurityConfig(UserDetailsService userService) {
+        this.userService = userService;
 
-//    public WebSecurityConfig(UserDetailsService userService, SuccessUserHandler successUserHandler) {
-//        this.userService = userService;
-//        this.successUserHandler = successUserHandler;
-//    }
-
-public WebSecurityConfig(UserDetailsService userService) {
-    this.userService = userService;
-
-}
-
+    }
 
 
     @Override
@@ -36,39 +28,22 @@ public WebSecurityConfig(UserDetailsService userService) {
 
         http
                 .csrf().disable()
-               .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin(form ->form
+                .formLogin(form -> form
                         .usernameParameter("email")
-//                .formLogin()
-                .loginPage("/login")
-//                .usernameParameter("email")
-                .successHandler(new SuccessUserHandler())
-                .permitAll());
-//                .and()
-//                .logout()
-//                .permitAll());
+
+                        .loginPage("/login")
+
+                        .successHandler(new SuccessUserHandler())
+                        .permitAll());
+
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password("{bcrypt}$2a$12$w3YQjFF/.1xjjAuWhOkIwu6FspaRrjSX5azuiuRQk5vegeuamhKHW")
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password("{bcrypt}$2a$12$7x02.GypEqsSVY5OYNgW0ecdh3Vjt40GzjmR52WschxGPklhZFyhe")
-//                .roles("USER", "ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 
     @Bean
     protected PasswordEncoder passwordEncoder() {
@@ -83,17 +58,3 @@ public WebSecurityConfig(UserDetailsService userService) {
         auth.authenticationProvider(provider);
     }
 }
-// аутентификация inMemory
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
-//}

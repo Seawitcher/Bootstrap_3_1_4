@@ -1,10 +1,8 @@
 package com.example.PP_3_1_4_Bootstrap.DAO;
 
-
 import com.example.PP_3_1_4_Bootstrap.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 
 import javax.persistence.EntityManager;
 import java.util.List;

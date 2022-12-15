@@ -1,6 +1,6 @@
 package com.example.PP_3_1_4_Bootstrap.controller;
 
-import com.example.PP_3_1_4_Bootstrap.model.Role;
+
 import com.example.PP_3_1_4_Bootstrap.model.User;
 import com.example.PP_3_1_4_Bootstrap.service.RoleService;
 import com.example.PP_3_1_4_Bootstrap.service.UserService;
@@ -12,14 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-import java.util.List;
 
 
 
@@ -50,17 +49,6 @@ public class AdminController {
         return "admin_section";
     }
 
-    @GetMapping("/newAddUserAdmin")
-    public String addNewUser(Model model) {
-      User user = new User();
-       model.addAttribute("user", user);
-
-       List<Role> roles = roleService.getList();
-        model.addAttribute("roleList", roles);
-
-        return "user_new_admin";
-    }
-
     @PostMapping("/newAddUserAdmin")
     public String saveNewUser(
             @ModelAttribute("user") User user
@@ -76,14 +64,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/editUser/{id}")
-    public String editUser(Model model, @PathVariable("id") Long id) {
-
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("roleList",roleService.getList());
-        return "admin_section";
-    }
-
 
     @PutMapping("/{id}/editUser")
     public String userSaveEdit(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
@@ -92,14 +72,4 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-//    @PatchMapping("/{id}")
-//    public String userSaveEdit(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
-//        userService.editUser(user);
-//        return "redirect:/admin";
-//    }
-//    @PatchMapping("/{id}")
-//    public String userSaveEdit(@ModelAttribute("user") User user, @ModelAttribute("roles") String roles) {
-//        userService.editUser(user, roles);
-//        return "redirect:/admin";
-//    }
 }

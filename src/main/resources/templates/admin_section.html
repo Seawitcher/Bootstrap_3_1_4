@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 
 </head>
@@ -30,23 +30,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
-                        <!--                                       <li class="list-inline-item"><h4 th:text="${#authorization.getAuthentication().getName()}"></h4></li>-->
-                        <!--                    <li class="list-inline-item"><h4 class="lead" th:text="' with roles: ' + "></h4></li>-->
+
                     </ul>
 
                     <a class="navbar-brand" href="/logout">Logout</a>
-                    <!--                <form name="logOut" th:action="@{/logout}" method="post">-->
-                    <!--                    <input type="submit" value="Logout">-->
-                    <!--                </form>-->
-                    <!--        <span class="navbar-text">-->
-                    <!--      Navbar text with an inline element-->
-                    <!--    </span>-->
+
                 </div>
             </nav>
         </div>
     </div>
 </div>
 
+<br>
 
 <!--Центральная панель с таблицей -->
 <div class="container-fluid">
@@ -201,29 +196,27 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="row font-weight-bold justify-content-center" for="name">Name</label>
-                                                                    <input th:name="name" th:type="text" class="form-control" th:value="${user.name}" id="name_delete"/>
+                                                                    <input th:name="name" th:type="text" class="form-control" th:value="${user.name}" id="name_delete" readonly/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="row font-weight-bold justify-content-center" for="lastname">Last name</label>
-                                                                    <input th:name="lastname" th:type="text" class="form-control" th:value="${user.lastname}" id="lastname_delete"/>
+                                                                    <input th:name="lastname" th:type="text" class="form-control" th:value="${user.lastname}" id="lastname_delete" readonly/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="row font-weight-bold justify-content-center" for="age">Age</label>
-                                                                    <input th:name="age" th:type="number" class="form-control" th:value="${user.age}" id="age_delete"/>
+                                                                    <input th:name="age" th:type="number" class="form-control" th:value="${user.age}" id="age_delete" readonly/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="row font-weight-bold justify-content-center" for="email">Email</label>
-                                                                    <input th:name="email" th:type="text" class="form-control" th:value="${user.email}" id="email_delete"/>
+                                                                    <input th:name="email" th:type="text" class="form-control" th:value="${user.email}" id="email_delete" readonly/>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="row font-weight-bold justify-content-center" for="password">Password</label>
-                                                                    <input th:name="password" th:type="text" class="form-control" th:value="${user.password}" id="password_delete"/>
+                                                                    <input th:name="password" th:type="text" class="form-control" th:value="${user.password}" id="password_delete" readonly/>
                                                                 </div>
 
-
-
                                                                 <label class="row font-weight-bold justify-content-center" for="roles">Role</label>
-                                                                <select multiple class="form-control" size="2"  id="roles_delete" name="roles">
+                                                                <select multiple class="form-control" size="2"  id="roles_delete" name="roles" readonly>
 
                                                                     <option
                                                                             th:each="roles : ${roleList}"
@@ -233,14 +226,13 @@
                                                                     > </option>
                                                                 </select>
 
-                                                                <!--                                                                Конец тела окна-->
 
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <button type="submit" class="btn btn-danger">Delete</button>
                                                                 </div>
-
                                                             </form>
+                                                            <!--       Конец тела окна-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -256,15 +248,57 @@
                             <!-- Конец первой панели с таблицей All Users-->
                             <!--Начало второй панели с add new Usera-->
                             <div class="tab-pane active" id="tab2" aria-expanded="true">
-                                <p>
-                                    Howdy, I'm in Section 2.
-                                </p>
+                                <h4>Add new user</h4>
+                                <!--  Начало Тело Модальной-->
+                                <form th:method="POST" th:action= "@{/admin/newAddUserAdmin}" th:object="${user}"  >
+
+                                    <div class="container col-md-6">
+                                        <label class="row font-weight-bold justify-content-center" for="name">Name</label>
+                                        <input th:name="name" th:type="text" class="form-control" th:value="${name}" id="name_new_user" placeholder="Name"/>
+                                    </div>
+                                    <div class="container col-md-6">
+                                        <label class="row font-weight-bold justify-content-center" for="lastname">Last name</label>
+                                        <input th:name="lastname" th:type="text" class="form-control" th:value="${lastname}" id="lastname_new_user" placeholder="Last name"/>
+                                    </div>
+                                    <div class="container col-md-6">
+                                        <label class="row font-weight-bold justify-content-center" for="age">Age</label>
+                                        <input th:name="age" th:type="number" class="form-control" th:value="${age}" id="age_new_user" placeholder="Age"/>
+                                    </div>
+                                    <div class="container col-md-6">
+                                        <label class="row font-weight-bold justify-content-center" for="email">Email</label>
+                                        <input th:name="email" th:type="text" class="form-control" th:value="${email}" id="email_new_user" placeholder="Email"/>
+                                    </div>
+                                    <div class="container col-md-6">
+                                        <label class="row font-weight-bold justify-content-center" for="password">Password</label>
+                                        <input th:name="password" th:type="text" class="form-control" th:value="${password}" id="password_new_user" placeholder="Password"/>
+                                    </div>
+                                    <div class="container col-md-6">
+                                    <label class="row font-weight-bold justify-content-center" for="roles">Role</label>
+                                    <select multiple class="form-control" size="2"  id="roles_new_user" name="roles">
+
+                                        <option
+                                                th:each="roles : ${roleList}"
+                                                th:text="${roles.getNoPrefix()}"
+                                                th:value = "${roles.id}"
+                                                th:selected="${user.roles.contains(roles)}"
+                                        > </option>
+                                    </select>
+                                    </div>
+
+                                        <br>
+                                    <div class="container text-center col-md-6">
+
+                                        <button type="submit" class="btn btn-success btn-lg">Add new user</button>
+                                    </div>
+
+                                </form>
+                                <!--  Конец тела окна-->
+
                             </div>
                             <!--Конец второй панели с с add new Usera-->
                         </div>
                         <!-- Конец клавишь All Users and Add new user-->
                     </div>
-
 
                 </div>
                 <!--Боковая правая панель конец-->

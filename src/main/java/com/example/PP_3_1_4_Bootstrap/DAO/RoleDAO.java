@@ -1,6 +1,5 @@
 package com.example.PP_3_1_4_Bootstrap.DAO;
 
-
 import com.example.PP_3_1_4_Bootstrap.model.Role;
 
 import java.util.List;

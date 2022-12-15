@@ -19,21 +19,11 @@ public class LoginController {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
+
     @GetMapping("/login")
     String login() {
         return "login";
 
-
-//    @GetMapping("/login")
-//    public String showLoginPage(Authentication authentication,String email) {
-//        User user = (User) authentication.getPrincipal();
-//        userService.loadUserByUserEmail(email);
-//        return "login";
     }
-//    @GetMapping
-//    public String getUser(Model model, Authentication authentication) {
-//        User user = userService.loadUserByUserEmail(((User) authentication.getPrincipal()).getEmail());
-//        model.addAttribute("user", user);
-//        return "userAuth";
-//    }
+
 }

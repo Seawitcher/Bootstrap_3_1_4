@@ -1,10 +1,7 @@
 package com.example.PP_3_1_4_Bootstrap.model;
 
-
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

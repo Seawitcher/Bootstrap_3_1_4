@@ -1,8 +1,6 @@
 package com.example.PP_3_1_4_Bootstrap.model;
 
-
 import org.springframework.security.core.GrantedAuthority;
-
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

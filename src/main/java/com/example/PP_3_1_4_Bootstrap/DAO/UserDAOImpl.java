@@ -1,6 +1,5 @@
 package com.example.PP_3_1_4_Bootstrap.DAO;
 
-
 import com.example.PP_3_1_4_Bootstrap.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
-
     @Override
     public void deleteUser(Long id) {
 
@@ -63,12 +61,13 @@ public class UserDAOImpl implements UserDAO {
                         "SELECT u FROM User u WHERE u.email = :email", User.class).setParameter("email", email)
                 .getSingleResult();
     }
+
     @Override
     public User getUserEmail(String email) {
 
 
         return entityManager.createQuery(
-                        "SELECT u FROM User u WHERE u.email = :email", User.class).getSingleResult();
-//        return entityManager.find(User.class, email);
+                "SELECT u FROM User u WHERE u.email = :email", User.class).getSingleResult();
+
     }
 }
